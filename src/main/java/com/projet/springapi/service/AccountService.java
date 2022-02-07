@@ -44,7 +44,7 @@ public class AccountService {
 
     public AccountDtoResponse getUserById(Long id) throws UserNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = requestedUser.get();
@@ -53,7 +53,7 @@ public class AccountService {
 
     public AccountDtoResponse getUserByEmail(String email) throws UserNotFoundException {
         Optional<User> requestedUser = userRepository.findByEmail(email);
-        if(requestedUser.isEmpty())
+        if(!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_EMAIL_NOT_FOUND");
 
         User user = requestedUser.get();
@@ -95,7 +95,7 @@ public class AccountService {
 
     public AccountDtoResponse updateUser(Long id, AccountDtoRequest request) throws UserNotFoundException {
         Optional<User> existingUser = userRepository.findById(id);
-        if (existingUser.isEmpty())
+        if (!existingUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         String encodedPassword = bCryptPasswordEncoder.encode(request.getPassword());
@@ -119,7 +119,7 @@ public class AccountService {
 
     public String deleteUser(Long id) throws UserNotFoundException {
         Optional<User> existingUser = userRepository.findById(id);
-        if (existingUser.isEmpty())
+        if (!existingUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         userRepository.deleteById(id);
@@ -128,7 +128,7 @@ public class AccountService {
 
     public AccountDtoResponse updateRoleToAdmin(Long id) throws UserNotFoundException, AlreadySetRoleException {
         Optional<User> existingUser = userRepository.findById(id);
-        if (existingUser.isEmpty())
+        if (!existingUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = existingUser.get();
@@ -143,7 +143,7 @@ public class AccountService {
 
     public AccountDtoResponse updateRoleToUser(Long id) throws UserNotFoundException, AlreadySetRoleException {
         Optional<User> existingUser = userRepository.findById(id);
-        if (existingUser.isEmpty())
+        if (!existingUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = existingUser.get();

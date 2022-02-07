@@ -37,7 +37,7 @@ public class JobService {
 
     public List<FavoriteJobDtoResponse> getUserFavoriteJobs(Long id) throws UserNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = requestedUser.get();
@@ -49,11 +49,11 @@ public class JobService {
 
     public FavoriteJobDtoResponse getFavoriteJobById(Long id, Long jobId) throws JobNotFoundException, UserNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         Optional<Job> requestedJob = jobRepository.findById(jobId);
-        if (requestedJob.isEmpty())
+        if (!requestedJob.isPresent())
             throw new JobNotFoundException("JOB_WITH_ID_NOT_FOUND");
 
         Job job = requestedJob.get();
@@ -62,7 +62,7 @@ public class JobService {
 
     public FavoriteJobDtoResponse saveFavoriteJob(Long id, FavoriteJobDtoRequest request) throws UserNotFoundException, ExistingFavoriteJob {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = requestedUser.get();
@@ -97,11 +97,11 @@ public class JobService {
 
     public String deleteFavoriteJob(Long id, Long jobId) throws JobNotFoundException, UserNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         Optional<Job> requestedJob = jobRepository.findById(jobId);
-        if (requestedJob.isEmpty())
+        if (!requestedJob.isPresent())
             throw new JobNotFoundException("JOB_WITH_ID_NOT_FOUND");
 
         jobRepository.deleteById(jobId);
@@ -110,11 +110,11 @@ public class JobService {
 
     public FavoriteJobDtoResponse applyToFavoriteJob(Long id, Long jobId, ApplicationRequest request) throws UserNotFoundException, JobNotFoundException, InvalidDateException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         Optional<Job> requestedJob = jobRepository.findById(jobId);
-        if (requestedJob.isEmpty())
+        if (!requestedJob.isPresent())
             throw new JobNotFoundException("JOB_WITH_ID_NOT_FOUND");
 
         Job job = requestedJob.get();
@@ -136,11 +136,11 @@ public class JobService {
 
     public FavoriteJobDtoResponse unapplyFromFavoriteJob(Long id, Long jobId, ApplicationRequest request) throws UserNotFoundException, JobNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         Optional<Job> requestedJob = jobRepository.findById(jobId);
-        if (requestedJob.isEmpty())
+        if (!requestedJob.isPresent())
             throw new JobNotFoundException("JOB_WITH_ID_NOT_FOUND");
 
         Job job = requestedJob.get();
@@ -153,7 +153,7 @@ public class JobService {
 
     public HistoryDtoResponse moveToHistory(Long id, HistoryDtoRequest request) throws UserNotFoundException, ExistingFavoriteJob {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = requestedUser.get();
@@ -181,7 +181,7 @@ public class JobService {
 
     public List<HistoryDtoResponse> getUserHistory(Long id) throws UserNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         User user = requestedUser.get();
@@ -193,11 +193,11 @@ public class JobService {
 
     public String deleteFromHistory(Long id, Long applicationId) throws UserNotFoundException, ApplicationInHistoryNotFoundException {
         Optional<User> requestedUser = userRepository.findById(id);
-        if (requestedUser.isEmpty())
+        if (!requestedUser.isPresent())
             throw new UserNotFoundException("USER_WITH_ID_NOT_FOUND");
 
         Optional<History> requestedApplication = historyRepository.findById(applicationId);
-        if (requestedApplication.isEmpty())
+        if (!requestedApplication.isPresent())
             throw new ApplicationInHistoryNotFoundException("APPLICATION_WITH_ID_NOT_FOUND");
 
         historyRepository.deleteById(applicationId);
