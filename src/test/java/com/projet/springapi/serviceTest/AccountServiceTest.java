@@ -50,33 +50,6 @@ public class AccountServiceTest {
                     45.678
             )
     );
-    private AccountDtoRequest account = new AccountDtoRequest(
-            "Anton",
-            "Mariadas",
-            "test@gmail.com",
-            "12345678",
-            "developpement",
-            42,
-            "chemin de la grille",
-            "93330",
-            "Neuilly sur Marne",
-            23.45,
-            45.678
-    );
-    private final AccountDtoResponse response = new AccountDtoResponse(
-            2L,
-            "Anton",
-            "Mariadas",
-            "test@gmail.com",
-            "developpement",
-            "USER",
-            42,
-            "chemin de la grille",
-            "93330",
-            "Neuilly sur Marne",
-            23.45,
-            45.678
-    );
 
     @Test
     void canGetAllUsers() {
@@ -105,40 +78,5 @@ public class AccountServiceTest {
         assertThatThrownBy(() -> accountService.getUserByEmail(user.getEmail()))
                 .isInstanceOf(UserNotFoundException.class)
                 .hasMessageContaining("USER_WITH_EMAIL_NOT_FOUND");
-    }
-
-    @Test
-    void canSaveUser() throws InvalidEmailException, ExistingEmailException {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void shouldUpdateUser() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void shouldDeleteUser() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void shouldUpdateRoleToAdmin() {
-        //given
-        //when
-        //then
-    }
-
-    @Test
-    void shouldUpdateRoleToUser() {
-        //given
-        //when
-        //then
     }
 }
