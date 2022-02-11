@@ -16,7 +16,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "https://frosty-allen-630331.netlify.app")
 @RequestMapping("/api/v1")
 public class AccountController {
 
@@ -34,25 +34,25 @@ public class AccountController {
 
 
     @GetMapping("/accounts")
-    public ResponseEntity<List<AccountDtoResponse>> getAll() {
+    public ResponseEntity<List<AccountDtoResponse>> getAllUsers() {
         List<AccountDtoResponse> usersDto = accountService.getAllUsers();
         return new ResponseEntity<>(usersDto, HttpStatus.OK);
     }
 
     @GetMapping("/accounts/{id}")
-    public ResponseEntity<AccountDtoResponse> getOne(@PathVariable Long id) throws UserNotFoundException {
+    public ResponseEntity<AccountDtoResponse> getOneUser(@PathVariable Long id) throws UserNotFoundException {
         AccountDtoResponse userDto = accountService.getUserById(id);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
     @PutMapping("/accounts/{id}")
-    public ResponseEntity<AccountDtoResponse> edit(@PathVariable Long id, @Valid @RequestBody AccountDtoRequest request) throws UserNotFoundException {
+    public ResponseEntity<AccountDtoResponse> editUser(@PathVariable Long id, @Valid @RequestBody AccountDtoRequest request) throws UserNotFoundException {
         AccountDtoResponse userDto = accountService.updateUser(id, request);
         return new ResponseEntity<>(userDto, HttpStatus.OK);
     }
 
     @DeleteMapping("/accounts/{id}")
-    public ResponseEntity<String> remove(@PathVariable Long id) throws UserNotFoundException {
+    public ResponseEntity<String> removeUser(@PathVariable Long id) throws UserNotFoundException {
         String response = accountService.deleteUser(id);
         return new ResponseEntity<>(response, HttpStatus.NO_CONTENT);
     }
